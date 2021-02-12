@@ -1,5 +1,8 @@
 public class Constants {
 
+    public static final String CURRENCY_FORMAT_STRING = "$%.2f.%n";
+    public static final String EMPLOYEE_TO_STRING_SEPARATOR = "::";
+
     public static enum DEPARTMENT_CODES {
         CS("CS"), ECE("ECE"), IT("IT");
 

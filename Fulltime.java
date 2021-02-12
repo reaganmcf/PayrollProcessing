@@ -2,14 +2,23 @@ public class Fulltime extends Employee {
 
     private int salary;
 
-    public Fulltime(String firstname, String lastname, Constants.DEPARTMENT_CODES department, Date dateHired,
-            int salary) {
-        super(firstname, lastname, department, dateHired);
+    public Fulltime(Profile profile, int salary) {
+        super(profile);
         this.salary = salary;
     }
 
     @Override
     public void calculatePayment() {
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "fulltime";
+    }
+
+    @Override
+    public boolean equals(Object e) {
+        return false;
     }
 }

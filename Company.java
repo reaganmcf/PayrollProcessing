@@ -74,9 +74,13 @@ public class Company {
     }
 
     public boolean setHours(Employee employee) {
+        return false;
     } // set working hours for a part time
 
     public void processPayments() {
+        for (Employee e : emplist) {
+            System.out.println(e.toString());
+        }
     } // process payments for all employees
 
     public void print() {

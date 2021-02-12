@@ -3,9 +3,8 @@ public class Parttime extends Employee {
     private double hourlyWage;
     private double workingHours;
 
-    public Parttime(String firstname, String lastname, Constants.DEPARTMENT_CODES department, Date dateHired,
-            double hourlyWage) {
-        super(firstname, lastname, department, dateHired);
+    public Parttime(Profile profile, double hourlyWage) {
+        super(profile);
         this.hourlyWage = hourlyWage;
     }
 
@@ -14,7 +13,17 @@ public class Parttime extends Employee {
     }
 
     @Override
-    public void calculatePayment() {
+    void calculatePayment() {
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "parttime";
+    }
+
+    @Override
+    public boolean equals(Object e) {
+        return false;
     }
 }
