@@ -23,7 +23,7 @@ public class PayrollProcessing {
     private static final String EMPLOYEE_ALREADY_IN_COMPANY_MSG = "Employee is already in the list.";
 
     // Input delimiter between commands to extract params
-    private final String INPUT_DELIMETER = "\\s";
+    private final String INPUT_DELIMETER = " ";
 
     // Scanner is a member because we have to remember to close it later. Gets
     // instantiated inside run()
@@ -42,6 +42,7 @@ public class PayrollProcessing {
 
         // Instantiate our scanner and company
         scanner = new Scanner(System.in);
+        company = new Company();
 
         // Wait for commands
         while (scanner.hasNextLine()) {
@@ -139,6 +140,7 @@ public class PayrollProcessing {
         // Check if hourly rate is negative
         if (hourlyRate < 0) {
             System.out.println(NO_NEGATIVE_HOURLY_RATE_MSG);
+            return;
         }
 
         // Create new employee and attempt to add to the company
@@ -259,14 +261,15 @@ public class PayrollProcessing {
      * Mismatched params error handler.
      */
     public void printMismatchedParamsError(int expected_param_count, int actual_param_count) {
-
+        System.out.println("Expected " + expected_param_count + " params but only got " + actual_param_count
+                + ". Please try again.");
     }
 
     /**
      * Invalid department error handler
      */
     public void printInvalidDepartmentError(String invalidDepartment) {
-        System.out.println(invalidDepartment + " is not a valid department code.");
+        System.out.println("'" + invalidDepartment + "' is not a valid department code.");
     }
 
     /**
