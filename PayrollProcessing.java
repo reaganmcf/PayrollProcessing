@@ -21,6 +21,7 @@ public class PayrollProcessing {
     private static final String NO_NEGATIVE_SALARY_MESSAGE = "Salary cannot be negative";
     private static final String EMPLOYEE_ADDED_MSG = "Employee added.";
     private static final String EMPLOYEE_ALREADY_IN_COMPANY_MSG = "Employee is already in the list.";
+    private static final String INVALID_DEPT_CODE_MSG = "Invalid management code.";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -118,6 +119,7 @@ public class PayrollProcessing {
         String rawDate = tokenizer.nextToken();
         String rawHourlyRate = tokenizer.nextToken();
 
+        // Parsed params
         Constants.DEPARTMENT_CODES departmentCode;
         Date date = new Date(rawDate);
         double hourlyRate = Double.parseDouble(rawHourlyRate);
@@ -161,7 +163,55 @@ public class PayrollProcessing {
      *                  params
      */
     private void addFulltimeEmployeeHandler(StringTokenizer tokenizer) {
+        // Expecting 4 params, but we have to check
+        final int EXPECTED_PARAM_COUNT = 4;
+        final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
+        if (ACTUAL_PARAM_COUNT != EXPECTED_PARAM_COUNT) {
+            printMismatchedParamsError(EXPECTED_PARAM_COUNT, ACTUAL_PARAM_COUNT);
+            return;
+        }
 
+        // Extract each param
+        String rawName = tokenizer.nextToken();
+        String rawDepartment = tokenizer.nextToken();
+        String rawDate = tokenizer.nextToken();
+        String rawSalary = tokenizer.nextToken();
+
+        // Parsed params
+        Constants.DEPARTMENT_CODES departmentCode;
+        Date date = new Date(rawDate);
+        int salary = Integer.parseInt(rawSalary);
+
+        // Check if department is valid
+        try {
+            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+        } catch (IllegalArgumentException e) {
+            // If we make it here, it isn't valid
+            printInvalidDepartmentError(rawDepartment);
+            return;
+        }
+
+        // Check if date is valid
+        if (!date.isValid()) {
+            printInvalidDateError(date);
+            return;
+        }
+
+        // Check if hourly rate is negative
+        if (salary < 0) {
+            System.out.println(NO_NEGATIVE_SALARY_MESSAGE);
+            return;
+        }
+
+        // Create new employee and attempt to add to the company
+        Fulltime newEmployee = new Fulltime(new Profile(rawName, departmentCode.getCode(), date), salary);
+        boolean addedSuccessfully = company.add(newEmployee);
+
+        if (addedSuccessfully) {
+            System.out.println(EMPLOYEE_ADDED_MSG);
+        } else {
+            System.out.println(EMPLOYEE_ALREADY_IN_COMPANY_MSG);
+        }
     }
 
     /**
@@ -171,7 +221,66 @@ public class PayrollProcessing {
      *                  params
      */
     private void addManagementEmployeeHandler(StringTokenizer tokenizer) {
+        // Expecting 5 params, but we have to check
+        final int EXPECTED_PARAM_COUNT = 5;
+        final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
+        if (ACTUAL_PARAM_COUNT != EXPECTED_PARAM_COUNT) {
+            printMismatchedParamsError(EXPECTED_PARAM_COUNT, ACTUAL_PARAM_COUNT);
+            return;
+        }
 
+        // Extract each param
+        String rawName = tokenizer.nextToken();
+        String rawDepartment = tokenizer.nextToken();
+        String rawDate = tokenizer.nextToken();
+        String rawSalary = tokenizer.nextToken();
+        String rawManagementCode = tokenizer.nextToken();
+
+        // Parsed params
+        Constants.DEPARTMENT_CODES departmentCode = null;
+        Date date = new Date(rawDate);
+        int salary = Integer.parseInt(rawSalary);
+        Constants.MANAGEMENT_ROLES managementRole = null;
+
+        // Check if department is valid
+        try {
+            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+        } catch (IllegalArgumentException e) {
+            // If we make it here, it isn't valid
+            printInvalidDepartmentError(rawDepartment);
+            return;
+        }
+
+        // Check if date is valid
+        if (!date.isValid()) {
+            printInvalidDateError(date);
+            return;
+        }
+
+        // Check if hourly rate is negative
+        if (salary < 0) {
+            System.out.println(NO_NEGATIVE_SALARY_MESSAGE);
+            return;
+        }
+
+        // Check if management role is valid
+        try {
+            managementRole = Constants.MANAGEMENT_ROLES.valueOf(rawManagementCode);
+        } catch (IllegalArgumentException e) {
+            // If we make it here, it isn't valid
+            System.out.println(INVALID_DEPT_CODE_MSG);
+        }
+
+        // Create new employee and attempt to add to the company
+        Management newEmployee = new Management(new Profile(rawName, departmentCode.getCode(), date), salary,
+                managementRole);
+        boolean addedSuccessfully = company.add(newEmployee);
+
+        if (addedSuccessfully) {
+            System.out.println(EMPLOYEE_ADDED_MSG);
+        } else {
+            System.out.println(EMPLOYEE_ALREADY_IN_COMPANY_MSG);
+        }
     }
 
     /**
@@ -181,6 +290,13 @@ public class PayrollProcessing {
      *                  params
      */
     private void removeEmployeeHandler(StringTokenizer tokenizer) {
+        // Expecting 3 params, but we have to check
+        final int EXPECTED_PARAM_COUNT = 3;
+        final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
+        if (ACTUAL_PARAM_COUNT != EXPECTED_PARAM_COUNT) {
+            printMismatchedParamsError(EXPECTED_PARAM_COUNT, ACTUAL_PARAM_COUNT);
+            return;
+        }
 
     }
 
@@ -201,6 +317,15 @@ public class PayrollProcessing {
      *                  params
      */
     private void setHoursForEmployeeHandler(StringTokenizer tokenizer) {
+        // Expecting 5 params, but we have to check
+        final int EXPECTED_PARAM_COUNT = 4;
+        final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
+        if (ACTUAL_PARAM_COUNT != EXPECTED_PARAM_COUNT) {
+            printMismatchedParamsError(EXPECTED_PARAM_COUNT, ACTUAL_PARAM_COUNT);
+            return;
+        }
+
+        // Extract Params
 
     }
 
@@ -212,7 +337,7 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsHandler(StringTokenizer tokenizer) {
-
+        company.print();
     }
 
     /**
@@ -223,7 +348,7 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsDatesAscendingHandler(StringTokenizer tokenizer) {
-
+        company.printByDate();
     }
 
     /**
@@ -234,7 +359,7 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsGroupByDepartmentHandler(StringTokenizer tokenizer) {
-
+        company.printByDepartment();
     }
 
     /**

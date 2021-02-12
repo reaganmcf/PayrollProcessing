@@ -18,15 +18,15 @@ public class Constants {
     }
 
     public static enum MANAGEMENT_ROLES {
-        MANAGER(1), DEPARTMENT_HEAD(2), DIRECTOR(3);
+        MANAGER("1"), DEPARTMENT_HEAD("2"), DIRECTOR("3");
 
-        private int code;
+        private String code;
 
-        MANAGEMENT_ROLES(int code) {
+        MANAGEMENT_ROLES(String code) {
             this.code = code;
         }
 
-        public int getCode() {
+        public String getCode() {
             return this.code;
         }
     }
