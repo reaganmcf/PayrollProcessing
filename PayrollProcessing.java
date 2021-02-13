@@ -22,6 +22,11 @@ public class PayrollProcessing {
     private static final String EMPLOYEE_ADDED_MSG = "Employee added.";
     private static final String EMPLOYEE_ALREADY_IN_COMPANY_MSG = "Employee is already in the list.";
     private static final String INVALID_DEPT_CODE_MSG = "Invalid management code.";
+    private static final String NO_NEGATIVE_HOUR_IN_PAY_PERIOD_MSG = "Working hours cannot be negative.";
+    private static final String OVER_MAX_HOURS_IN_PAY_PERIOD_MSG = "Invalid Hours: over "
+            + String.valueOf(Constants.MAX_HOURS_IN_PAY_PERIOD);
+    private static final String EMPLOYEE_DOES_NOT_EXIST_MSG = "Employee does not exist.";
+    private static final String WORKING_HOURS_SET_MSG = "Working hours set.";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -325,8 +330,53 @@ public class PayrollProcessing {
             return;
         }
 
-        // Extract Params
+        // Extract each param
+        String rawName = tokenizer.nextToken();
+        String rawDepartment = tokenizer.nextToken();
+        String rawDate = tokenizer.nextToken();
+        String rawHours = tokenizer.nextToken();
 
+        // Parsed params
+        Constants.DEPARTMENT_CODES departmentCode;
+        Date date = new Date(rawDate);
+        double hours = Integer.parseInt(rawHours);
+
+        // Check if department is valid
+        try {
+            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+        } catch (IllegalArgumentException e) {
+            // If we make it here, it isn't valid
+            printInvalidDepartmentError(rawDepartment);
+            return;
+        }
+
+        // Check if date is valid
+        if (!date.isValid()) {
+            printInvalidDateError(date);
+            return;
+        }
+
+        // Check if hours is negative
+        if (hours < 0) {
+            System.out.println(NO_NEGATIVE_HOUR_IN_PAY_PERIOD_MSG);
+            return;
+        }
+
+        // Check if hours is greater than max hours in pay period
+        if (hours > Constants.MAX_HOURS_IN_PAY_PERIOD) {
+            System.out.println(OVER_MAX_HOURS_IN_PAY_PERIOD_MSG);
+            return;
+        }
+
+        // Create new Parttime object and pass and send it to Company.setHours
+        Parttime temp = new Parttime(new Profile(rawName, departmentCode.getCode(), date), 0.0);
+        boolean setHoursSuccessfully = company.setHours(temp);
+
+        if (setHoursSuccessfully) {
+            System.out.println(WORKING_HOURS_SET_MSG);
+        } else {
+            System.out.println(EMPLOYEE_DOES_NOT_EXIST_MSG);
+        }
     }
 
     /**
