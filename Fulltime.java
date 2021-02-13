@@ -1,6 +1,6 @@
 public class Fulltime extends Employee {
 
-    private int salary;
+    protected int salary;
 
     public Fulltime(Profile profile, int salary) {
         super(profile);
@@ -9,7 +9,12 @@ public class Fulltime extends Employee {
 
     @Override
     public void calculatePayment() {
+        // Reset payment
+        this.payment = 0;
 
+        // Payment for each pay period is equal to annual salary divided by the pay
+        // periods in a year
+        this.payment = (double) this.salary / Constants.FULL_TIME_PAY_PERIODS_IN_YEAR;
     }
 
     @Override

@@ -27,6 +27,7 @@ public class PayrollProcessing {
             + String.valueOf(Constants.MAX_HOURS_IN_PAY_PERIOD);
     private static final String EMPLOYEE_DOES_NOT_EXIST_MSG = "Employee does not exist.";
     private static final String WORKING_HOURS_SET_MSG = "Working hours set.";
+    private static final String CALC_PAYMENTS_MSG = "Calculation of employee payments done.";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -312,7 +313,8 @@ public class PayrollProcessing {
      *                  params
      */
     private void calculatePaymentsHandler(StringTokenizer tokenizer) {
-
+        company.processPayments();
+        System.out.println(CALC_PAYMENTS_MSG);
     }
 
     /**

@@ -14,7 +14,15 @@ public class Parttime extends Employee {
 
     @Override
     void calculatePayment() {
+        // Reset payment
+        this.payment = 0;
 
+        // The first 80 hours are charged at normal rate
+        this.payment = this.hourlyWage * Math.min(Constants.OVERTIME_HOURS_THRESHOLD, this.workingHours);
+
+        // Any hours over 80 are charged at overtime rate
+        double overtimeHours = Math.max(0, this.workingHours - Constants.OVERTIME_HOURS_THRESHOLD);
+        this.payment += overtimeHours * this.hourlyWage * Constants.OVERTIME_PAY_RATE;
     }
 
     @Override

@@ -9,7 +9,12 @@ public class Management extends Fulltime {
 
     @Override
     public void calculatePayment() {
+        // No need to reset payment because it gets reset in the super call
+        // Call Fulltime calculatePayment
+        super.calculatePayment();
 
+        // Additional Compensation
+        this.payment += managementRole.getAdditionalCompensation();
     }
 
     @Override
