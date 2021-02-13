@@ -87,8 +87,86 @@ public class Company {
     } // print earning statements for all employees
 
     public void printByDepartment() {
+        // Check if bookshelf is empty
+        if(this.numEmployee == 0) {
+            System.out.println("list is empty!");
+        } else {
+            // Print header
+            System.out.println("**List of employees by department.");
+
+            // Sort employees by departments
+            // We will be using bubble sort
+            for(int i = 0; i < this.numEmployee - 1; i++) {
+                // the last i elements are already in place
+                for(int j = 0; j < this.numEmployee - i - 1; j++) {
+                    // Compare departments
+                    int dateCompareValue = this.emplist[j].getDepartment().compareTo(this.emplist[j+1].getDepartment());
+                    if(dateCompareValue > 0) {
+                        // swap
+                        Employee temp = this.emplist[j];
+                        this.emplist[j] = this.emplist[j+1];
+                        this.emplist[j+1] = temp;
+                    } else if(dateCompareValue == 0) {
+                        // If the departments are the same, then we need to compare the employee names
+                        if(this.emplist[j].getName().compareTo(this.emplist[j+1].getName()) > 0) {
+                            // swap 
+                            Employee temp = this.emplist[j];
+                            this.emplist[j] = this.emplist[j+1];
+                            this.emplist[j+1] = temp;
+                        }
+                    }
+                }
+            }
+
+            // Now that employees are sorted by departments, print them out
+            for(int i = 0; i < this.numEmployee; i++) {
+                System.out.println(this.numEmployee[i]);
+            }
+            
+            //Print footer
+            System.out.println("**End of list");
+        }
     } // print earning statements by department
 
-    public void printByDate() {
-    } // print earning statements by date hired
+    public void printByDate() { // print earning statements by date hired
+        // Check if bookshelf is empty
+        if(this.numEmployee == 0) {
+            System.out.println("list is empty!");
+        } else {
+            // Print header
+            System.out.println("**List of employees by the dates hired.");
+
+            // Sort employees by date hired
+            // We will be using bubble sort
+            for(int i = 0; i < this.numEmployee - 1; i++) {
+                // the last i elements are already in place
+                for(int j = 0; j < this.numEmployee - i - 1; j++) {
+                    // Compare dates hired
+                    int dateCompareValue = this.emplist[j].getDateHired().compareTo(this.emplist[j+1].getDateHired());
+                    if(dateCompareValue > 0) {
+                        // swap
+                        Employee temp = this.emplist[j];
+                        this.emplist[j] = this.emplist[j+1];
+                        this.emplist[j+1] = temp;
+                    } else if(dateCompareValue == 0) {
+                        // If the dates are the same, then we need to compare the employee names
+                        if(this.emplist[j].getName().compareTo(this.emplist[j+1].getName()) > 0) {
+                            // swap 
+                            Employee temp = this.emplist[j];
+                            this.emplist[j] = this.emplist[j+1];
+                            this.emplist[j+1] = temp;
+                        }
+                    }
+                }
+            }
+
+            // Now that employees are sorted by dates hired, print them out
+            for(int i = 0; i < this.numEmployee; i++) {
+                System.out.println(this.numEmployee[i]);
+            }
+            
+            //Print footer
+            System.out.println("**End of list");
+        }
+    } 
 }
