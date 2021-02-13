@@ -7,6 +7,18 @@ public abstract class Employee {
         this.profile = profile;
     }
 
+    public String getName() {
+        return this.profile.getName();
+    }
+
+    public String getDepartment() {
+        return this.profile.getDepartment();
+    }
+
+    public Date getDateHired() {
+        return this.profile.getDateHired();
+    }
+
     abstract void calculatePayment();
 
     @Override
