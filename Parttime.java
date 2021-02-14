@@ -12,6 +12,10 @@ public class Parttime extends Employee {
         this.workingHours = workingHours;
     }
 
+    public double getWorkingHours(){
+        return this.workingHours;
+    }
+
     @Override
     void calculatePayment() {
         // Reset payment
