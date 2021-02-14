@@ -74,11 +74,24 @@ public class Company {
     }
 
     public boolean setHours(Employee employee) {
+        // get the index of the employee in emplist
+        int idx = find(employee);
+        // return false if the employee is not found
+        if(inx < 0){
+            return false
+        }
+
         // cannot set hours if employee isn't parttime
         if(employee instanceof Parttime == false){
             return false;
         }
-        
+
+        // get the employee in the list
+        Parttime emp = this.emplist[inx];
+
+        // set the working hours of the employee found in the list
+        emp.setWorkingHours(employee.getWorkingHours());
+
         return true;
     } // set working hours for a part time
 
