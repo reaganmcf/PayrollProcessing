@@ -21,7 +21,15 @@ public class Management extends Fulltime {
 
     @Override
     public String toString() {
-        return super.toString() + "::management";
+        // Call parent, which builds most of the string
+        String employeeString = super.toString() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+
+        // Append Manager Compensation
+        employeeString += Constants.MANAGER_COMPENSATION_STR
+                + String.format(Constants.CURRENCY_FORMAT_STRING, this.managementRole.getAdditionalCompensation());
+
+        // return total string
+        return employeeString;
     }
 
     @Override

@@ -29,6 +29,7 @@ public class PayrollProcessing {
     private static final String CALC_PAYMENTS_MSG = "Calculation of employee payments done.";
     private static final String COMPANY_IS_EMPTY_MSG = "Employee database is empty.";
     private static final String EMPLOYEE_REMOVED_MSG = "Employee removed.";
+    private static final String PRINTING_EARNINGS_STATEMENTS_MSG = "--Printing earning statements for all employees--";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -389,7 +390,7 @@ public class PayrollProcessing {
         // Parsed params
         Constants.DEPARTMENT_CODES departmentCode;
         Date date = new Date(rawDate);
-        double hours = Integer.parseInt(rawHours);
+        int hours = Integer.parseInt(rawHours);
 
         // Check if department is valid
         try {
@@ -443,6 +444,7 @@ public class PayrollProcessing {
             return;
         }
 
+        System.out.println(PRINTING_EARNINGS_STATEMENTS_MSG);
         company.print();
     }
 
@@ -460,6 +462,7 @@ public class PayrollProcessing {
             return;
         }
 
+        System.out.println(PRINTING_EARNINGS_STATEMENTS_MSG);
         company.printByDate();
     }
 
@@ -477,6 +480,7 @@ public class PayrollProcessing {
             return;
         }
 
+        System.out.println(PRINTING_EARNINGS_STATEMENTS_MSG);
         company.printByDepartment();
     }
 

@@ -1,18 +1,18 @@
 public class Parttime extends Employee {
 
     private double hourlyWage;
-    private double workingHours;
+    private int workingHours;
 
     public Parttime(Profile profile, double hourlyWage) {
         super(profile);
         this.hourlyWage = hourlyWage;
     }
 
-    public void setWorkingHours(double workingHours) {
+    public void setWorkingHours(int workingHours) {
         this.workingHours = workingHours;
     }
 
-    public double getWorkingHours() {
+    public int getWorkingHours() {
         return this.workingHours;
     }
 
@@ -35,7 +35,21 @@ public class Parttime extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + "parttime";
+        // Call parent, which builds most of the string
+        String employeeString = super.toString();
+
+        // Append Employee Type
+        employeeString += Constants.PARTTIME_STR + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+
+        // Append Hourly Rate
+        employeeString += Constants.HOURLY_RATE_STR + String.format(Constants.CURRENCY_FORMAT_STRING, this.hourlyWage)
+                + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+
+        // Append hours worked this period
+        employeeString += Constants.HOURS_WORKED_THIS_PERIOD_STR + this.workingHours;
+
+        // return total string
+        return employeeString;
     }
 
     @Override
