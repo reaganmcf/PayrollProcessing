@@ -14,12 +14,14 @@ public class Management extends Fulltime {
         super.calculatePayment();
 
         // Additional Compensation
-        this.payment += managementRole.getAdditionalCompensation();
+        System.out.println(this.managementRole.getCode());
+        double totalCompensation = this.getPayment() + managementRole.getAdditionalCompensation();
+        this.setPayment(totalCompensation);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "management";
+        return super.toString() + "::management";
     }
 
     @Override

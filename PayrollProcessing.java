@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -28,6 +27,8 @@ public class PayrollProcessing {
     private static final String EMPLOYEE_DOES_NOT_EXIST_MSG = "Employee does not exist.";
     private static final String WORKING_HOURS_SET_MSG = "Working hours set.";
     private static final String CALC_PAYMENTS_MSG = "Calculation of employee payments done.";
+    private static final String COMPANY_IS_EMPTY_MSG = "Employee database is empty.";
+    private static final String EMPLOYEE_REMOVED_MSG = "Employee removed.";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -275,6 +276,7 @@ public class PayrollProcessing {
         } catch (IllegalArgumentException e) {
             // If we make it here, it isn't valid
             System.out.println(INVALID_DEPT_CODE_MSG);
+            return;
         }
 
         // Create new employee and attempt to add to the company
@@ -304,6 +306,45 @@ public class PayrollProcessing {
             return;
         }
 
+        // Extract each param
+        String rawName = tokenizer.nextToken();
+        String rawDepartment = tokenizer.nextToken();
+        String rawDate = tokenizer.nextToken();
+
+        // Parsed params
+        Constants.DEPARTMENT_CODES departmentCode;
+        Date date = new Date(rawDate);
+
+        // Check if department is valid
+        try {
+            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+        } catch (IllegalArgumentException e) {
+            // If we make it here, it isn't valid
+            printInvalidDepartmentError(rawDepartment);
+            return;
+        }
+
+        // Check if date is valid
+        if (!date.isValid()) {
+            printInvalidDateError(date);
+            return;
+        }
+
+        // Check if database is empty
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
+        // Create dummy employee and pass it to company
+        Employee dummyEmployee = new Employee(new Profile(rawName, departmentCode.getCode(), date));
+        boolean didRemoveSuccessfully = company.remove(dummyEmployee);
+
+        if (didRemoveSuccessfully) {
+            System.out.println(EMPLOYEE_REMOVED_MSG);
+        } else {
+            System.out.println(EMPLOYEE_DOES_NOT_EXIST_MSG);
+        }
     }
 
     /**
@@ -313,6 +354,13 @@ public class PayrollProcessing {
      *                  params
      */
     private void calculatePaymentsHandler(StringTokenizer tokenizer) {
+
+        // Check if database is empty
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         company.processPayments();
         System.out.println(CALC_PAYMENTS_MSG);
     }
@@ -389,6 +437,12 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsHandler(StringTokenizer tokenizer) {
+        // Check if database is empty
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         company.print();
     }
 
@@ -400,6 +454,12 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsDatesAscendingHandler(StringTokenizer tokenizer) {
+        // Check if database is empty
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         company.printByDate();
     }
 
@@ -411,6 +471,12 @@ public class PayrollProcessing {
      *                  params
      */
     private void printEarningsGroupByDepartmentHandler(StringTokenizer tokenizer) {
+        // Check if database is empty
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         company.printByDepartment();
     }
 

@@ -87,9 +87,9 @@ public class Company {
         }
 
         // get the employee in the list
-        Parttime emp = (Parttime)this.emplist[idx];
+        Parttime emp = (Parttime) this.emplist[idx];
         // cast employee passed into setHours as type Parttime
-        Parttime temp = (Parttime)employee;
+        Parttime temp = (Parttime) employee;
 
         // set the working hours of the employee found in the list
         emp.setWorkingHours(temp.getWorkingHours());
@@ -98,14 +98,14 @@ public class Company {
     } // set working hours for a part time
 
     public void processPayments() {
-        for (Employee employee : emplist) {
-            employee.calculatePayment();
+        for (int i = 0; i < this.numEmployee; i++) {
+            this.emplist[i].calculatePayment();
         }
     } // process payments for all employees
 
     public void print() {
-        for (Employee e : emplist) {
-            System.out.println(e.toString());
+        for (int i = 0; i < this.numEmployee; i++) {
+            System.out.println(this.emplist[i]);
         }
     } // print earning statements for all employees
 
@@ -192,5 +192,14 @@ public class Company {
             // Print footer
             System.out.println("**End of list");
         }
+    }
+
+    /**
+     * Check if there are no employees in the company
+     * 
+     * @return boolean status representing whether or not the company is empty
+     */
+    public boolean isEmpty() {
+        return this.numEmployee == 0;
     }
 }

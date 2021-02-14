@@ -10,11 +10,12 @@ public class Fulltime extends Employee {
     @Override
     public void calculatePayment() {
         // Reset payment
-        this.payment = 0;
+        this.setPayment(0);
 
         // Payment for each pay period is equal to annual salary divided by the pay
         // periods in a year
-        this.payment = (double) this.salary / Constants.FULL_TIME_PAY_PERIODS_IN_YEAR;
+        double newPayment = (double) this.salary / Constants.FULL_TIME_PAY_PERIODS_IN_YEAR;
+        this.setPayment(newPayment);
     }
 
     @Override

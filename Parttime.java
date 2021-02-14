@@ -12,21 +12,25 @@ public class Parttime extends Employee {
         this.workingHours = workingHours;
     }
 
-    public double getWorkingHours(){
+    public double getWorkingHours() {
         return this.workingHours;
     }
 
     @Override
-    void calculatePayment() {
+    public void calculatePayment() {
         // Reset payment
-        this.payment = 0;
+        this.setPayment(0);
 
         // The first 80 hours are charged at normal rate
-        this.payment = this.hourlyWage * Math.min(Constants.OVERTIME_HOURS_THRESHOLD, this.workingHours);
+        double normalPay = this.hourlyWage * Math.min(Constants.OVERTIME_HOURS_THRESHOLD, this.workingHours);
 
         // Any hours over 80 are charged at overtime rate
         double overtimeHours = Math.max(0, this.workingHours - Constants.OVERTIME_HOURS_THRESHOLD);
-        this.payment += overtimeHours * this.hourlyWage * Constants.OVERTIME_PAY_RATE;
+        double overtimePay = overtimeHours * this.hourlyWage * Constants.OVERTIME_PAY_RATE;
+
+        // Combine and call the setter
+        double totalPay = normalPay + overtimePay;
+        this.setPayment(totalPay);
     }
 
     @Override
