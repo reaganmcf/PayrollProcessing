@@ -1,13 +1,12 @@
 /**
- * Abstract Employee Superclass used by Fulltime, Parttime, and Management
- * Employees
+ * Employee Superclass used by Fulltime, Parttime, and Management Employees
  * 
  * @author Reagan McFarland
  */
-public abstract class Employee {
+public class Employee {
 
-    protected Profile profile;
-    protected double payment = 0.0;
+    private Profile profile;
+    private double payment = 0.0;
 
     /**
      * Creates a new Employee instance with a given profile
@@ -47,10 +46,52 @@ public abstract class Employee {
     }
 
     /**
+     * Getter for the payment of an employee
+     * 
+     * @return Payment for the employee
+     */
+    public double getPayment() {
+        return this.payment;
+    }
+
+    /**
+     * Setter for the payment of an employee
+     * 
+     * @param newPayment New payment to set payment to
+     */
+    public void setPayment(double newPayment) {
+        this.payment = newPayment;
+    }
+
+    /*
      * Calculate payments must be implemented in all subclasses according to their
      * own specific rules
      */
-    abstract void calculatePayment();
+    public void calculatePayment() {
+        // Nothing needs to go here, because all subclasses will override
+    };
+
+    /**
+     * equals @Override method for Employee
+     * 
+     * @param e Object to compare against
+     * @return boolean whether or not the employees are equal
+     */
+    @Override
+    public boolean equals(Object e) {
+        // Check if object is even an employee
+        if (!(e instanceof Employee)) {
+            return false;
+        }
+
+        // Object casted to employee
+        Employee objectAsEmployee = (Employee) e;
+
+        // Check profile
+        // return this.profile.equals(e.)
+        return false;
+
+    }
 
     /**
      * toString @Override method for Employee
@@ -59,20 +100,21 @@ public abstract class Employee {
      */
     @Override
     public String toString() {
-        String ret = "";
+        String employeeString = "";
 
         // Append name
-        ret += this.profile.getName() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+        employeeString += this.profile.getName() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
         // Append department
-        ret += this.profile.getDepartment() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+        employeeString += this.profile.getDepartment() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
         // Append dateHired
-        ret += this.profile.getDateHired() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+        employeeString += this.profile.getDateHired() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
         // Append payment
-        ret += String.format(Constants.CURRENCY_FORMAT_STRING, this.payment) + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+        employeeString += "Payment " + String.format(Constants.CURRENCY_FORMAT_STRING, this.payment)
+                + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
-        return ret;
+        return employeeString;
     }
 }

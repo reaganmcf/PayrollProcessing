@@ -1,6 +1,6 @@
 public class Fulltime extends Employee {
 
-    protected int salary;
+    private int salary;
 
     public Fulltime(Profile profile, int salary) {
         super(profile);
@@ -10,16 +10,28 @@ public class Fulltime extends Employee {
     @Override
     public void calculatePayment() {
         // Reset payment
-        this.payment = 0;
+        this.setPayment(0);
 
         // Payment for each pay period is equal to annual salary divided by the pay
         // periods in a year
-        this.payment = (double) this.salary / Constants.FULL_TIME_PAY_PERIODS_IN_YEAR;
+        double newPayment = (double) this.salary / Constants.FULL_TIME_PAY_PERIODS_IN_YEAR;
+        this.setPayment(newPayment);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "fulltime";
+        // Call parent, which builds most of the string
+        String employeeString = super.toString();
+
+        // Append Employee Type
+        employeeString += Constants.FULLTIME_STR + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+
+        // Append Annual Salary
+        float salaryAsFloat = Float.valueOf(this.salary);
+        employeeString += Constants.ANNUAL_SALARY_STR + String.format(Constants.CURRENCY_FORMAT_STRING, salaryAsFloat);
+
+        // return total string
+        return employeeString;
     }
 
     @Override

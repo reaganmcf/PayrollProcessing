@@ -5,12 +5,18 @@
  * @author Reagan McFarland
  */
 public class Constants {
-    public static final String CURRENCY_FORMAT_STRING = "$%.2f.%n";
+    public static final String CURRENCY_FORMAT_STRING = "$%,.2f";
     public static final String EMPLOYEE_TO_STRING_SEPARATOR = "::";
     public static final int MAX_HOURS_IN_PAY_PERIOD = 100;
     public static int FULL_TIME_PAY_PERIODS_IN_YEAR = 26;
     public static int OVERTIME_HOURS_THRESHOLD = 80;
     public static double OVERTIME_PAY_RATE = 1.5;
+    public static String ANNUAL_SALARY_STR = "Annual Salary ";
+    public static String HOURLY_RATE_STR = "Hourly Rate ";
+    public static String HOURS_WORKED_THIS_PERIOD_STR = "Hours worked this period: ";
+    public static String MANAGER_COMPENSATION_STR = "Manager Compensation ";
+    public static String FULLTIME_STR = "FULL TIME";
+    public static String PARTTIME_STR = "PART TIME";
 
     private static int MANAGER_YEARLY_BONUS = 5000;
     private static int DEPARTMENT_HEAD_YEARLY_BONUS = 9500;
