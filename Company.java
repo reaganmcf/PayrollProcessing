@@ -1,3 +1,9 @@
+/** 
+ * Company class implements all of the commands sent from PayrollProcessing
+ * Company size is by default set to 4 via the INITIAL_EMPLOYEE_SIZE constant variable.
+ * 
+ * @author Vatche Kafafian
+ */
 public class Company {
     private Employee[] emplist;
     private int numEmployee;
@@ -6,11 +12,18 @@ public class Company {
     // whenever it is full
     private static int INITIAL_EMPLOYEE_SIZE = 4;
 
+    /**
+     * No parameter constructor
+     */
     public Company() {
         emplist = new Employee[INITIAL_EMPLOYEE_SIZE];
         this.numEmployee = 0;
     }
-
+    /**
+     * 
+     * @param employee Employee we are trying to find
+     * @return -1 if not found, otherwise the index in the list
+     */
     private int find(Employee employee) {
         Employee tempEmployee = null;
         // Traverse each employee in the list of employees
@@ -24,7 +37,9 @@ public class Company {
         }
         return -1;
     }
-
+    /**
+     * Increase the size of the emplist array by INITIAL_EMPLOYEE_SIZE
+     */
     private void grow() {
         // Set temporary array to emplist array
         Employee[] tempEmpList = emplist;
@@ -37,7 +52,11 @@ public class Company {
         }
     }
 
-    // check the profile before adding
+    /**
+     * Adds an employee to the employee list, grow if there is not enough space
+     * @param employee Employee we are adding to emplist
+     * @return true if an employee was able to be added, false otherwise
+     */
     public boolean add(Employee employee) {
         // Traverse the emplist array and check if there are empty slots in the array
         for (int i = 0; i < emplist.length; i++) {
@@ -53,7 +72,11 @@ public class Company {
         return false;
     }
 
-    // maintain the original sequence
+    /**
+     * Removes an employee from the employee list
+     * @param employee Employee we are removing from emplist
+     * @return true if the employee was able to be removed, false if the employee is not found in the list
+     */
     public boolean remove(Employee employee) {
         // has to call .find()
         // Call the find method to check if the employee is in emplist
@@ -73,6 +96,12 @@ public class Company {
         return true;
     }
 
+    /**
+     * Set hours for parttime employees
+     * @param employee Employee that is getting their hours set
+     * @return false if the employee if the given employee is not found or 
+     * if the employee is not parttime, true otherwise.
+     */
     public boolean setHours(Employee employee) {
         // get the index of the employee in emplist
         int idx = find(employee);
@@ -95,20 +124,28 @@ public class Company {
         emp.setWorkingHours(temp.getWorkingHours());
 
         return true;
-    } // set working hours for a part time
+    } 
 
+    /**
+     * Process the payments of each employee in emplist
+     */
     public void processPayments() {
         for (Employee employee : emplist) {
             employee.calculatePayment();
         }
-    } // process payments for all employees
-
+    } 
+    /**
+     * Print each employee's earning statement in emplist by the current sequence.
+     */
     public void print() {
         for (Employee e : emplist) {
             System.out.println(e.toString());
         }
-    } // print earning statements for all employees
+    } 
 
+    /**
+     * Print each employee's earning statement by department number.
+     */
     public void printByDepartment() {
         // Check if bookshelf is empty
         if (this.numEmployee == 0) {
@@ -150,9 +187,12 @@ public class Company {
             // Print footer
             System.out.println("**End of list");
         }
-    } // print earning statements by department
+    } 
 
-    public void printByDate() { // print earning statements by date hired
+    /**
+     * Print each employee's earning statement by date hired.
+     */
+    public void printByDate() {
         // Check if bookshelf is empty
         if (this.numEmployee == 0) {
             System.out.println("list is empty!");
