@@ -7,5 +7,5 @@ Project #2 for Rutgers Software Methodology
 (src/)          $ javac -d ./build *.java
 (src/build/)    $ cd build
 (src/build/)    $ cat ./../raw\ input.txt | java RunProject2 > actual.txt
-(src/build/)    $ diff -y actual.txt
+(src/build/)    $ diff -y actual.txt ./../expected.txt --width=250
 ```
