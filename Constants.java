@@ -81,11 +81,11 @@ public class Constants {
         public double getAdditionalCompensation() {
             switch (code) {
                 case "1":
-                    return MANAGER_YEARLY_BONUS / FULL_TIME_PAY_PERIODS_IN_YEAR;
+                    return MANAGER_YEARLY_BONUS / (double) FULL_TIME_PAY_PERIODS_IN_YEAR;
                 case "2":
-                    return DEPARTMENT_HEAD_YEARLY_BONUS / FULL_TIME_PAY_PERIODS_IN_YEAR;
+                    return DEPARTMENT_HEAD_YEARLY_BONUS / (double) FULL_TIME_PAY_PERIODS_IN_YEAR;
                 default:
-                    return DIRECTOR_YEARLY_BONUS / FULL_TIME_PAY_PERIODS_IN_YEAR;
+                    return DIRECTOR_YEARLY_BONUS / (double) FULL_TIME_PAY_PERIODS_IN_YEAR;
             }
         }
     }

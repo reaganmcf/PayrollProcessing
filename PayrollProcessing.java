@@ -30,6 +30,7 @@ public class PayrollProcessing {
     private static final String COMPANY_IS_EMPTY_MSG = "Employee database is empty.";
     private static final String EMPLOYEE_REMOVED_MSG = "Employee removed.";
     private static final String PRINTING_EARNINGS_STATEMENTS_MSG = "--Printing earning statements for all employees--";
+    private static final String PRINTING_EARNINGS_STATEMENTS_BY_DEPARTMENT_MSG = "--Printing earning statements by department--";
 
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
@@ -480,7 +481,7 @@ public class PayrollProcessing {
             return;
         }
 
-        System.out.println(PRINTING_EARNINGS_STATEMENTS_MSG);
+        System.out.println(PRINTING_EARNINGS_STATEMENTS_BY_DEPARTMENT_MSG);
         company.printByDepartment();
     }
 

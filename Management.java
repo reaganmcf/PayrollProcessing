@@ -14,7 +14,6 @@ public class Management extends Fulltime {
         super.calculatePayment();
 
         // Additional Compensation
-        System.out.println(this.managementRole.getCode());
         double totalCompensation = this.getPayment() + managementRole.getAdditionalCompensation();
         this.setPayment(totalCompensation);
     }
