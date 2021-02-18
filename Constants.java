@@ -22,6 +22,9 @@ public class Constants {
     private static int DEPARTMENT_HEAD_YEARLY_BONUS = 9500;
     private static int DIRECTOR_YEARLY_BONUS = 12000;
 
+    private static final String NO_MATCHING_DEPT_CODE_MSG = "No matching department code to department enum";
+    private static final String NO_MATCHING_MANAGER_ROLE_MSG = "No matching manager role to manager enum";
+
     public static enum DEPARTMENT_CODES {
         CS("CS"), ECE("ECE"), IT("IT");
 
@@ -33,6 +36,19 @@ public class Constants {
 
         public String getCode() {
             return this.code;
+        }
+
+        static DEPARTMENT_CODES getDepartmentCodeFromString(String rawDepartmentCode) throws IllegalArgumentException {
+            switch (rawDepartmentCode) {
+                case "CS":
+                    return CS;
+                case "ECE":
+                    return ECE;
+                case "IT":
+                    return IT;
+                default:
+                    throw new IllegalArgumentException(NO_MATCHING_DEPT_CODE_MSG);
+            }
         }
     }
 
@@ -47,6 +63,19 @@ public class Constants {
 
         public String getCode() {
             return this.code;
+        }
+
+        static MANAGEMENT_ROLES getManagementRoleFromString(String rawManagementRole) throws IllegalArgumentException {
+            switch (rawManagementRole) {
+                case "1":
+                    return MANAGER;
+                case "2":
+                    return DEPARTMENT_HEAD;
+                case "3":
+                    return DEPARTMENT_HEAD;
+                default:
+                    throw new IllegalArgumentException(NO_MATCHING_MANAGER_ROLE_MSG);
+            }
         }
 
         public double getAdditionalCompensation() {

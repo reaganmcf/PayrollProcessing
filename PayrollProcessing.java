@@ -20,7 +20,7 @@ public class PayrollProcessing {
     private static final String NO_NEGATIVE_SALARY_MESSAGE = "Salary cannot be negative";
     private static final String EMPLOYEE_ADDED_MSG = "Employee added.";
     private static final String EMPLOYEE_ALREADY_IN_COMPANY_MSG = "Employee is already in the list.";
-    private static final String INVALID_DEPT_CODE_MSG = "Invalid management code.";
+    private static final String INVALID_MANAGEMENT_CODE_MSG = "Invalid management code.";
     private static final String NO_NEGATIVE_HOUR_IN_PAY_PERIOD_MSG = "Working hours cannot be negative.";
     private static final String OVER_MAX_HOURS_IN_PAY_PERIOD_MSG = "Invalid Hours: over "
             + String.valueOf(Constants.MAX_HOURS_IN_PAY_PERIOD);
@@ -134,7 +134,7 @@ public class PayrollProcessing {
 
         // Check if department is valid
         try {
-            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+            departmentCode = Constants.DEPARTMENT_CODES.getDepartmentCodeFromString(rawDepartment);
         } catch (IllegalArgumentException e) {
             // If we make it here, it isn't valid
             printInvalidDepartmentError(rawDepartment);
@@ -192,7 +192,7 @@ public class PayrollProcessing {
 
         // Check if department is valid
         try {
-            departmentCode = Constants.DEPARTMENT_CODES.valueOf(rawDepartment);
+            departmentCode = Constants.DEPARTMENT_CODES.getDepartmentCodeFromString(rawDepartment);
         } catch (IllegalArgumentException e) {
             // If we make it here, it isn't valid
             printInvalidDepartmentError(rawDepartment);
@@ -273,10 +273,10 @@ public class PayrollProcessing {
 
         // Check if management role is valid
         try {
-            managementRole = Constants.MANAGEMENT_ROLES.valueOf(rawManagementCode);
+            managementRole = Constants.MANAGEMENT_ROLES.getManagementRoleFromString(rawManagementCode);
         } catch (IllegalArgumentException e) {
             // If we make it here, it isn't valid
-            System.out.println(INVALID_DEPT_CODE_MSG);
+            System.out.println(INVALID_MANAGEMENT_CODE_MSG);
             return;
         }
 
