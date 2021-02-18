@@ -1,8 +1,15 @@
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * PayrollProcessing handles and process all commands from the console. No
+ * features are implemented here, just dispatch logic to send the correct
+ * commands with their repsective parameters to the correct Company function
+ * call
+ * 
+ * @author Reagan McFarland
+ */
 public class PayrollProcessing {
-
     // Command Identifiers
     private static final String CMD_ADD_EMPLOYEE_PARTTIME = "AP";
     private static final String CMD_ADD_EMPLOYEE_FULLTIME = "AF";
@@ -15,6 +22,8 @@ public class PayrollProcessing {
     private static final String CMD_PRINT_EARNINGS_GROUP_BY_DEPARTMENT = "PD";
     private static final String CMD_QUIT = "Q";
 
+    // Output Messages
+    private static final String PROCESS_STARTS_MSG = "Payroll Processing starts.";
     private static final String QUIT_MSG = "Payroll Processing Completed.";
     private static final String NO_NEGATIVE_HOURLY_RATE_MSG = "Pay rate  cannot be negative.";
     private static final String NO_NEGATIVE_SALARY_MESSAGE = "Salary cannot be negative";

@@ -94,22 +94,14 @@ public class Employee {
     }
 
     /**
-     * toString @Override method for Employee
+     * Returns a string representation of the employee following the format of
+     * <name>::<dept>::<date>::<payment>"
      * 
-     * @return String object following the format <name>::<dept>::<date>
+     * @return String following the format above
      */
     @Override
     public String toString() {
-        String employeeString = "";
-
-        // Append name
-        employeeString += this.profile.getName() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
-
-        // Append department
-        employeeString += this.profile.getDepartment() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
-
-        // Append dateHired
-        employeeString += this.profile.getDateHired() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
+        String employeeString = profile.toString();
 
         // Append payment
         employeeString += "Payment " + String.format(Constants.CURRENCY_FORMAT_STRING, this.payment)

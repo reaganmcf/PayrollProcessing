@@ -25,6 +25,9 @@ public class Constants {
     private static final String NO_MATCHING_DEPT_CODE_MSG = "No matching department code to department enum";
     private static final String NO_MATCHING_MANAGER_ROLE_MSG = "No matching manager role to manager enum";
 
+    /**
+     * Enum for the Department Codes
+     */
     public static enum DEPARTMENT_CODES {
         CS("CS"), ECE("ECE"), IT("IT");
 
@@ -34,10 +37,24 @@ public class Constants {
             this.code = code;
         }
 
+        /**
+         * Get the department code for a department code enum
+         * 
+         * @return String representation of the department code
+         */
         public String getCode() {
             return this.code;
         }
 
+        /**
+         * Given a string representation of the department code, attempt to match it to
+         * a valid DEPARTMENT_CODES Enum. If it doesn't find a match, throws
+         * IllegalArgumentException
+         * 
+         * @param rawDepartmentCode String representation of the department code
+         * @return DEPARTMENT_CODES Enum
+         * @throws IllegalArgumentException Gets thrown if no match is found
+         */
         static DEPARTMENT_CODES getDepartmentCodeFromString(String rawDepartmentCode) throws IllegalArgumentException {
             switch (rawDepartmentCode) {
                 case "CS":
@@ -52,6 +69,9 @@ public class Constants {
         }
     }
 
+    /**
+     * Enum for Management Roles
+     */
     public static enum MANAGEMENT_ROLES {
         MANAGER("1"), DEPARTMENT_HEAD("2"), DIRECTOR("3");
 
@@ -61,10 +81,24 @@ public class Constants {
             this.code = code;
         }
 
+        /**
+         * Get the management code for a management role enum
+         * 
+         * @return Code for management role
+         */
         public String getCode() {
             return this.code;
         }
 
+        /**
+         * Given a string representation of the management code, attempt to match it to
+         * a valid MANAGEMENT_ROLES Enum. If it doesn't find a match, throws
+         * IllegalArgumentException
+         * 
+         * @param rawManagementRole String representation of the management code
+         * @return MANAGEMENT_ROLES Enum
+         * @throws IllegalArgumentException Gets thrown if no match is found
+         */
         static MANAGEMENT_ROLES getManagementRoleFromString(String rawManagementRole) throws IllegalArgumentException {
             switch (rawManagementRole) {
                 case "1":
@@ -78,6 +112,12 @@ public class Constants {
             }
         }
 
+        /**
+         * Calculate the additional compensation a given manager recieves which varies
+         * on the management role
+         * 
+         * @return additional compensation
+         */
         public double getAdditionalCompensation() {
             switch (code) {
                 case "1":
