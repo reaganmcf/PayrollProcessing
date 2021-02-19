@@ -1,6 +1,7 @@
-/** 
+/**
  * Company class implements all of the commands sent from PayrollProcessing
- * Company size is by default set to 4 via the INITIAL_EMPLOYEE_SIZE constant variable.
+ * Company size is by default set to 4 via the INITIAL_EMPLOYEE_SIZE constant
+ * variable.
  * 
  * @author Vatche Kafafian
  */
@@ -8,9 +9,11 @@ public class Company {
     private Employee[] emplist;
     private int numEmployee;
 
+    private static int NOT_FOUND = -1;
+
     // Initial size of our Company, also the factor by which we increase the emplist
     // whenever it is full
-    private static int INITIAL_EMPLOYEE_SIZE = 4;
+    private int INITIAL_EMPLOYEE_SIZE = 4;
 
     /**
      * No parameter constructor
@@ -19,6 +22,7 @@ public class Company {
         emplist = new Employee[INITIAL_EMPLOYEE_SIZE];
         this.numEmployee = 0;
     }
+
     /**
      * 
      * @param employee Employee we are trying to find
@@ -35,8 +39,9 @@ public class Company {
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
+
     /**
      * Increase the size of the emplist array by INITIAL_EMPLOYEE_SIZE
      */
@@ -54,10 +59,15 @@ public class Company {
 
     /**
      * Adds an employee to the employee list, grow if there is not enough space
+     * 
      * @param employee Employee we are adding to emplist
      * @return true if an employee was able to be added, false otherwise
      */
     public boolean add(Employee employee) {
+        // Check if an employee already is in the company
+        if (find(employee) != NOT_FOUND)
+            return false;
+
         // Traverse the emplist array and check if there are empty slots in the array
         for (int i = 0; i < emplist.length; i++) {
             // If a slot is empty, the Employee can be inserted into the array
@@ -67,15 +77,19 @@ public class Company {
                 return true;
             }
         }
+
+        // If we made it here, we need to grow the company and then add
         grow();
         add(employee);
-        return false;
+        return true;
     }
 
     /**
      * Removes an employee from the employee list
+     * 
      * @param employee Employee we are removing from emplist
-     * @return true if the employee was able to be removed, false if the employee is not found in the list
+     * @return true if the employee was able to be removed, false if the employee is
+     *         not found in the list
      */
     public boolean remove(Employee employee) {
         // has to call .find()
@@ -98,9 +112,10 @@ public class Company {
 
     /**
      * Set hours for parttime employees
+     * 
      * @param employee Employee that is getting their hours set
-     * @return false if the employee if the given employee is not found or 
-     * if the employee is not parttime, true otherwise.
+     * @return false if the employee if the given employee is not found or if the
+     *         employee is not parttime, true otherwise.
      */
     public boolean setHours(Employee employee) {
         // get the index of the employee in emplist
@@ -124,7 +139,7 @@ public class Company {
         emp.setWorkingHours(temp.getWorkingHours());
 
         return true;
-    } 
+    }
 
     /**
      * Process the payments of each employee in emplist
@@ -133,7 +148,8 @@ public class Company {
         for (int i = 0; i < this.numEmployee; i++) {
             this.emplist[i].calculatePayment();
         }
-    } 
+    }
+
     /**
      * Print each employee's earning statement in emplist by the current sequence.
      */
@@ -141,7 +157,7 @@ public class Company {
         for (int i = 0; i < this.numEmployee; i++) {
             System.out.println(this.emplist[i]);
         }
-    } 
+    }
 
     /**
      * Print each employee's earning statement by department number.
@@ -187,7 +203,7 @@ public class Company {
             // Print footer
             System.out.println("**End of list");
         }
-    } 
+    }
 
     /**
      * Print each employee's earning statement by date hired.

@@ -48,8 +48,10 @@ public class Management extends Fulltime {
         // Call parent, which builds most of the string
         String employeeString = super.toString() + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
+        String managerTitle = this.managementRole.getTitle();
+
         // Append Manager Compensation
-        employeeString += Constants.MANAGER_COMPENSATION_STR
+        employeeString += managerTitle + Constants.COMPENSATION_STR
                 + String.format(Constants.CURRENCY_FORMAT_STRING, this.managementRole.getAdditionalCompensation());
 
         // return total string
@@ -61,6 +63,6 @@ public class Management extends Fulltime {
      */
     @Override
     public boolean equals(Object e) {
-        return false;
+        return super.equals(e);
     }
 }

@@ -62,6 +62,6 @@ public class Fulltime extends Employee {
      */
     @Override
     public boolean equals(Object e) {
-        return false;
+        return super.equals(e);
     }
 }

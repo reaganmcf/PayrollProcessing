@@ -1,3 +1,5 @@
 *.swp
 .classpath
 build/
+run.sh
+nodemon.json

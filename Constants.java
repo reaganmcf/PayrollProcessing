@@ -14,10 +14,13 @@ public class Constants {
     public static String ANNUAL_SALARY_STR = "Annual Salary ";
     public static String HOURLY_RATE_STR = "Hourly Rate ";
     public static String HOURS_WORKED_THIS_PERIOD_STR = "Hours worked this period: ";
-    public static String MANAGER_COMPENSATION_STR = "Manager Compensation ";
+    public static String COMPENSATION_STR = " Compensation ";
     public static String FULLTIME_STR = "FULL TIME";
     public static String PARTTIME_STR = "PART TIME";
 
+    private static String MANAGER_STR = "Manager";
+    private static String DEPARTMENT_HEAD_STR = "DepartmentHead";
+    private static String DIRECTOR_STR = "Director";
     private static int MANAGER_YEARLY_BONUS = 5000;
     private static int DEPARTMENT_HEAD_YEARLY_BONUS = 9500;
     private static int DIRECTOR_YEARLY_BONUS = 12000;
@@ -73,12 +76,14 @@ public class Constants {
      * Enum for Management Roles
      */
     public static enum MANAGEMENT_ROLES {
-        MANAGER("1"), DEPARTMENT_HEAD("2"), DIRECTOR("3");
+        MANAGER("1", MANAGER_STR), DEPARTMENT_HEAD("2", DEPARTMENT_HEAD_STR), DIRECTOR("3", DIRECTOR_STR);
 
         private String code;
+        private String longTitle;
 
-        MANAGEMENT_ROLES(String code) {
+        MANAGEMENT_ROLES(String code, String longTitle) {
             this.code = code;
+            this.longTitle = longTitle;
         }
 
         /**
@@ -88,6 +93,15 @@ public class Constants {
          */
         public String getCode() {
             return this.code;
+        }
+
+        /**
+         * Get the long string title for a management role
+         * 
+         * @return String representing the title string for a management role
+         */
+        public String getTitle() {
+            return this.longTitle;
         }
 
         /**
@@ -106,11 +120,17 @@ public class Constants {
                 case "2":
                     return DEPARTMENT_HEAD;
                 case "3":
-                    return DEPARTMENT_HEAD;
+                    return DIRECTOR;
                 default:
                     throw new IllegalArgumentException(NO_MATCHING_MANAGER_ROLE_MSG);
             }
         }
+
+        /**
+         * Given
+         * 
+         * @return
+         */
 
         /**
          * Calculate the additional compensation a given manager recieves which varies

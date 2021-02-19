@@ -79,10 +79,11 @@ public class Profile {
      */
     @Override
     public boolean equals(Object obj) {
+        final int EQUAL = 0;
         if (obj instanceof Profile) {
             Profile objAsProfile = (Profile) obj;
-            if (objAsProfile.name.equals(this.name) && objAsProfile.department.equals(this.department)
-                    && objAsProfile.dateHired.equals(this.dateHired)) {
+            if (objAsProfile.getName().equals(this.name) && objAsProfile.getDepartment().equals(this.department)
+                    && objAsProfile.getDateHired().compareTo(this.dateHired) == EQUAL) {
                 return true;
             }
         }

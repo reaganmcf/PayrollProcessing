@@ -55,6 +55,15 @@ public class Employee {
     }
 
     /**
+     * Getter for the profile of an employee
+     * 
+     * @return Profile for the employee
+     */
+    public Profile getProfile() {
+        return this.profile;
+    }
+
+    /**
      * Setter for the payment of an employee
      * 
      * @param newPayment New payment to set payment to
@@ -83,14 +92,11 @@ public class Employee {
         if (!(e instanceof Employee)) {
             return false;
         }
-
         // Object casted to employee
         Employee objectAsEmployee = (Employee) e;
 
         // Check profile
-        // return this.profile.equals(e.)
-        return false;
-
+        return this.getProfile().equals(objectAsEmployee.getProfile());
     }
 
     /**

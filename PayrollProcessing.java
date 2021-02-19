@@ -57,7 +57,7 @@ public class PayrollProcessing {
      * dispatches the command to the appropriate function handler
      */
     public void run() {
-        System.out.println("Payroll Processing starts.");
+        System.out.println(PROCESS_STARTS_MSG);
 
         // Instantiate our scanner and company
         scanner = new Scanner(System.in);
