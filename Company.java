@@ -167,9 +167,6 @@ public class Company {
         if (this.numEmployee == 0) {
             System.out.println("list is empty!");
         } else {
-            // Print header
-            System.out.println("**List of employees by department.");
-
             // Sort employees by departments
             // We will be using bubble sort
             for (int i = 0; i < this.numEmployee - 1; i++) {
@@ -199,9 +196,6 @@ public class Company {
             for (int i = 0; i < this.numEmployee; i++) {
                 System.out.println(this.emplist[i]);
             }
-
-            // Print footer
-            System.out.println("**End of list");
         }
     }
 
@@ -213,9 +207,6 @@ public class Company {
         if (this.numEmployee == 0) {
             System.out.println("list is empty!");
         } else {
-            // Print header
-            System.out.println("**List of employees by the dates hired.");
-
             // Sort employees by date hired
             // We will be using bubble sort
             for (int i = 0; i < this.numEmployee - 1; i++) {
@@ -244,9 +235,6 @@ public class Company {
             for (int i = 0; i < this.numEmployee; i++) {
                 System.out.println(this.emplist[i]);
             }
-
-            // Print footer
-            System.out.println("**End of list");
         }
     }
 

@@ -33,7 +33,7 @@ public class Management extends Fulltime {
 
         // Additional Compensation
         double totalCompensation = this.getPayment() + managementRole.getAdditionalCompensation();
-        this.setPayment(totalCompensation);
+        super.setPayment(totalCompensation);
     }
 
     /**

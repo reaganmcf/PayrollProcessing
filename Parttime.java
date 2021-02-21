@@ -45,7 +45,7 @@ public class Parttime extends Employee {
     @Override
     public void calculatePayment() {
         // Reset payment
-        this.setPayment(0);
+        super.setPayment(0);
 
         // The first 80 hours are charged at normal rate
         double normalPay = this.hourlyWage * Math.min(Constants.OVERTIME_HOURS_THRESHOLD, this.workingHours);
@@ -56,7 +56,7 @@ public class Parttime extends Employee {
 
         // Combine and call the setter
         double totalPay = normalPay + overtimePay;
-        this.setPayment(totalPay);
+        super.setPayment(totalPay);
     }
 
     /**

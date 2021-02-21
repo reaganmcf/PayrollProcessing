@@ -24,23 +24,23 @@ public class PayrollProcessing {
 
     // Output Messages
     private static final String PROCESS_STARTS_MSG = "Payroll Processing starts.";
-    private static final String QUIT_MSG = "Payroll Processing Completed.";
-    private static final String NO_NEGATIVE_HOURLY_RATE_MSG = "Pay rate  cannot be negative.";
-    private static final String NO_NEGATIVE_SALARY_MESSAGE = "Salary cannot be negative";
+    private static final String QUIT_MSG = "Payroll Processing completed.";
+    private static final String NO_NEGATIVE_HOURLY_RATE_MSG = "Pay rate cannot be negative.";
+    private static final String NO_NEGATIVE_SALARY_MESSAGE = "Salary cannot be negative.";
     private static final String EMPLOYEE_ADDED_MSG = "Employee added.";
     private static final String EMPLOYEE_ALREADY_IN_COMPANY_MSG = "Employee is already in the list.";
     private static final String INVALID_MANAGEMENT_CODE_MSG = "Invalid management code.";
     private static final String NO_NEGATIVE_HOUR_IN_PAY_PERIOD_MSG = "Working hours cannot be negative.";
     private static final String OVER_MAX_HOURS_IN_PAY_PERIOD_MSG = "Invalid Hours: over "
-            + String.valueOf(Constants.MAX_HOURS_IN_PAY_PERIOD);
+            + String.valueOf(Constants.MAX_HOURS_IN_PAY_PERIOD) + ".";
     private static final String EMPLOYEE_DOES_NOT_EXIST_MSG = "Employee does not exist.";
     private static final String WORKING_HOURS_SET_MSG = "Working hours set.";
     private static final String CALC_PAYMENTS_MSG = "Calculation of employee payments done.";
     private static final String COMPANY_IS_EMPTY_MSG = "Employee database is empty.";
     private static final String EMPLOYEE_REMOVED_MSG = "Employee removed.";
     private static final String PRINTING_EARNINGS_STATEMENTS_MSG = "--Printing earning statements for all employees--";
+    private static final String PRINTING_EARNINGS_STATEMENTS_BY_DATE_MSG = "--Printing earning statements by date hired--";
     private static final String PRINTING_EARNINGS_STATEMENTS_BY_DEPARTMENT_MSG = "--Printing earning statements by department--";
-
     // Input delimiter between commands to extract params
     private final String INPUT_DELIMETER = " ";
 
@@ -123,6 +123,7 @@ public class PayrollProcessing {
      *                  params
      */
     private void addPartimeEmployeeHandler(StringTokenizer tokenizer) {
+
         // Expecting 4 params, but we have to check
         final int EXPECTED_PARAM_COUNT = 4;
         final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
@@ -309,6 +310,12 @@ public class PayrollProcessing {
      *                  params
      */
     private void removeEmployeeHandler(StringTokenizer tokenizer) {
+        // Check if company is empty first
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         // Expecting 3 params, but we have to check
         final int EXPECTED_PARAM_COUNT = 3;
         final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
@@ -472,7 +479,7 @@ public class PayrollProcessing {
             return;
         }
 
-        System.out.println(PRINTING_EARNINGS_STATEMENTS_MSG);
+        System.out.println(PRINTING_EARNINGS_STATEMENTS_BY_DATE_MSG);
         company.printByDate();
     }
 
