@@ -185,11 +185,11 @@ public class Company {
                 itCount++;
             }
         }
+        Employee tempEmployees[][] = new Employee[Constants.NUMBER_OF_DEPARTMENTS][];
 
-
-        Employee csEmployees[] = new Employee[csCount]; // array of cs employees
-        Employee eceEmployees[] = new Employee[eceCount]; // array of ece employees
-        Employee itEmployees[] = new Employee[itCount]; // array of it employees
+        tempEmployees[Constants.CS_DEPARTMENT_INDEX] = new Employee[csCount]; // array of cs employees
+        tempEmployees[Constants.ECE_DEPARTMENT_INDEX] = new Employee[eceCount]; // array of ece employees
+        tempEmployees[Constants.IT_DEPARTMENT_INDEX] = new Employee[itCount]; // array of it employees
 
 
         csCount = 0;
@@ -199,110 +199,71 @@ public class Company {
         // store the cooresponding employees into their respective department arrays
         for(Employee emp : emplist){
             if(emp.getDepartment().equals(Constants.DEPARTMENT_CODES.CS)){
-                csEmployees[csCount] = emp;
+                tempEmployees[Constants.CS_DEPARTMENT_INDEX][csCount] = emp;
                 csCount++;
             }   
             else if(emp.getDepartment().equals(Constants.DEPARTMENT_CODES.ECE)){
-                eceEmployees[eceCount] = emp;
+                tempEmployees[Constants.ECE_DEPARTMENT_INDEX][eceCount] = emp;
                 eceCount++;
             }
             else if(emp.getDepartment().equals(Constants.DEPARTMENT_CODES.IT)){
-                itEmployees[itCount] = emp;
+                tempEmployees[Constants.IT_DEPARTMENT_INDEX][itCount] = emp;
                 itCount++;
             }
         }
 
         int nameCompareValue = 0;
         int dateCompareValue = 0;
+        int departmentIndex = 0;
 
         // We will be using bubble sort
-        if(csCount > 0){
-            for(int i = 0; i < csCount - 1; i++){
-                // the last i elements are already in place
-                for(int j = 0; j < csCount - i - 1; j++){
-                    // sort the csEmployees array by name
-                    nameCompareValue = csEmployees[j].getName().compareTo(csEmployees[j + 1].getName());
-                    if(nameCompareValue > 0){
-                        // swap
-                        Employee temp = csEmployees[j];
-                        csEmployees[j] = csEmployees[j + 1];
-                        csEmployees[j + 1] = temp;
-                    }
-                    // if the names are the same, compare by date hired
-                    else if(nameCompareValue == 0){
-                        dateCompareValue = csEmployees[j].getDateHired().compareTo(csEmployees[j + 1].getDateHired());
-                        if(dateCompareValue > 0){
-                            // swap
-                            Employee temp = csEmployees[j];
-                            csEmployees[j] = csEmployees[j + 1];
-                            csEmployees[j + 1] = temp;
-                        }
-                    }
-                }
+        for(int x = 0; x < Constants.NUMBER_OF_DEPARTMENTS; x++){
+            if(x == Constants.CS_DEPARTMENT_INDEX){
+                departmentIndex = csCount;
             }
-        }
-        // We will be using bubble sort
-        if(eceCount > 0){
-            for(int i = 0; i < eceCount - 1; i++){
-                // the last i elements are already in place
-                for(int j = 0; j < eceCount - i - 1; j++){
-                    // sort the eceEmployees array by name
-                    nameCompareValue = eceEmployees[j].getName().compareTo(eceEmployees[j + 1].getName());
-                    if(nameCompareValue > 0){
-                        // swap
-                        Employee temp = eceEmployees[j];
-                        eceEmployees[j] = eceEmployees[j + 1];
-                        eceEmployees[j + 1] = temp;
-                    }
-                    else if(nameCompareValue == 0){
+            else if(x == Constants.ECE_DEPARTMENT_INDEX){
+                departmentIndex = eceCount;
+            }
+            else if(x == Constants.IT_DEPARTMENT_INDEX){
+                departmentIndex = itCount;
+            }
+            if(departmentIndex > 0){
+                for(int i = 0; i < departmentIndex - 1; i++){
+                    // the last i elements are already in place
+                    for(int j = 0; j < departmentIndex - i - 1; j++){
+                        // sort the csEmployees array by name
+                        nameCompareValue = tempEmployees[x][j].getName().compareTo(tempEmployees[x][j + 1].getName());
+                        if(nameCompareValue > 0){
+                            // swap
+                            Employee temp = tempEmployees[x][j];
+                            tempEmployees[x][j] = tempEmployees[x][j + 1];
+                            tempEmployees[x][j + 1] = temp;
+                        }
                         // if the names are the same, compare by date hired
-                        dateCompareValue = eceEmployees[j].getDateHired().compareTo(eceEmployees[j + 1].getDateHired());
-                        if(dateCompareValue > 0){
-                            // swap
-                            Employee temp = eceEmployees[j];
-                            eceEmployees[j] = eceEmployees[j + 1];
-                            eceEmployees[j + 1] = temp;
+                        else if(nameCompareValue == 0){
+                            dateCompareValue = tempEmployees[x][j].getDateHired().compareTo(tempEmployees[x][j + 1].getDateHired());
+                            if(dateCompareValue > 0){
+                                // swap
+                                Employee temp = tempEmployees[x][j];
+                                tempEmployees[x][j] = tempEmployees[x][j + 1];
+                                tempEmployees[x][j + 1] = temp;
+                            }
                         }
                     }
                 }
             }
         }
-        // We will be using bubble sort
-        if(itCount > 0){
-            for(int i = 0; i < itCount - 1; i++){
-                // the last i elements are already in place 
-                for(int j = 0; j < itCount - i - 1; j++){
-                    // sort the itEmployees array by name
-                    nameCompareValue = itEmployees[j].getName().compareTo(itEmployees[j + 1].getName());
-                    if(nameCompareValue > 0){
-                        // swap
-                        Employee temp = itEmployees[j];
-                        itEmployees[j] = itEmployees[j + 1];
-                        itEmployees[j + 1] = temp;
-                    }
-                    // if the names are the same, compare by date hired
-                    else if(nameCompareValue == 0){
-                        dateCompareValue = itEmployees[j].getDateHired().compareTo(itEmployees[j + 1].getDateHired());
-                        if(dateCompareValue > 0){
-                            // swap
-                            Employee temp = itEmployees[j];
-                            itEmployees[j] = itEmployees[j + 1];
-                            itEmployees[j + 1] = temp;
-                        }
-                    }
-                }
-            }
-        }
+           
         for(int i = 0; i < csCount; i++){
-            emplist[i] = csEmployees[i];
+            emplist[i] = tempEmployees[Constants.CS_DEPARTMENT_INDEX][i];
         }
 
         for(int i = csCount; i < eceCount; i++){
-            emplist[i] = eceEmployees[i];
+            emplist[i] = tempEmployees[Constants.ECE_DEPARTMENT_INDEX][i];
         }
 
         for(int i = eceCount; i < itCount; i++){
-            emplist[i] = itEmployees[i];
+            emplist[i] = tempEmployees[Constants.IT_DEPARTMENT_INDEX][i];
         }
 
         // Now that employees are sorted by departments, print them out

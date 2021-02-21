@@ -17,6 +17,10 @@ public class Constants {
     public static String COMPENSATION_STR = " Compensation ";
     public static String FULLTIME_STR = "FULL TIME";
     public static String PARTTIME_STR = "PART TIME";
+    public static int NUMBER_OF_DEPARTMENTS = 3;
+    public static int CS_DEPARTMENT_INDEX = 0;
+    public static int ECE_DEPARTMENT_INDEX = 0;
+    public static int IT_DEPARTMENT_INDEX = 0;
 
     private static String MANAGER_STR = "Manager";
     private static String DEPARTMENT_HEAD_STR = "DepartmentHead";
