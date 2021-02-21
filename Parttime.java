@@ -79,7 +79,7 @@ public class Parttime extends Employee {
                 + Constants.EMPLOYEE_TO_STRING_SEPARATOR;
 
         // Append hours worked this period
-        employeeString += Constants.HOURS_WORKED_THIS_PERIOD_STR + this.workingHours;
+        employeeString += Constants.HOURS_WORKED_THIS_PERIOD_STR + this.getWorkingHours();
 
         // return total string
         return employeeString;

@@ -240,6 +240,7 @@ public class PayrollProcessing {
      *                  params
      */
     private void addManagementEmployeeHandler(StringTokenizer tokenizer) {
+
         // Expecting 5 params, but we have to check
         final int EXPECTED_PARAM_COUNT = 5;
         final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
@@ -390,6 +391,12 @@ public class PayrollProcessing {
      *                  params
      */
     private void setHoursForEmployeeHandler(StringTokenizer tokenizer) {
+        // Check if company is empty first
+        if (company.isEmpty()) {
+            System.out.println(COMPANY_IS_EMPTY_MSG);
+            return;
+        }
+
         // Expecting 5 params, but we have to check
         final int EXPECTED_PARAM_COUNT = 4;
         final int ACTUAL_PARAM_COUNT = tokenizer.countTokens();
@@ -438,6 +445,7 @@ public class PayrollProcessing {
 
         // Create new Parttime object and pass and send it to Company.setHours
         Parttime temp = new Parttime(new Profile(rawName, departmentCode.getCode(), date), 0.0);
+        temp.setWorkingHours(hours);
         boolean setHoursSuccessfully = company.setHours(temp);
 
         if (setHoursSuccessfully) {
