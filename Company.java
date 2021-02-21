@@ -154,6 +154,7 @@ public class Company {
      * Print each employee's earning statement in emplist by the current sequence.
      */
     public void print() {
+        // Check if company is empty
         for (int i = 0; i < this.numEmployee; i++) {
             System.out.println(this.emplist[i]);
         }
@@ -163,26 +164,31 @@ public class Company {
      * Print each employee's earning statement by department number.
      */
     public void printByDepartment() {
-        // Check if bookshelf is empty
-        if (this.numEmployee == 0) {
-            System.out.println("list is empty!");
-        } else {
-            // Sort employees by departments
-            // We will be using bubble sort
-            for (int i = 0; i < this.numEmployee - 1; i++) {
-                // the last i elements are already in place
-                for (int j = 0; j < this.numEmployee - i - 1; j++) {
-                    // Compare departments
-                    int dateCompareValue = this.emplist[j].getDepartment()
-                            .compareTo(this.emplist[j + 1].getDepartment());
-                    if (dateCompareValue > 0) {
+
+        // Sort employees by departments
+        // We will be using bubble sort
+        for (int i = 0; i < this.numEmployee - 1; i++) {
+            // the last i elements are already in place
+            for (int j = 0; j < this.numEmployee - i - 1; j++) {
+                // Compare departments
+                int departmentCompareValue = this.emplist[j].getDepartment()
+                        .compareTo(this.emplist[j + 1].getDepartment());
+                if (departmentCompareValue > 0) {
+                    // swap
+                    Employee temp = this.emplist[j];
+                    this.emplist[j] = this.emplist[j + 1];
+                    this.emplist[j + 1] = temp;
+                } else if (departmentCompareValue == 0) {
+                    // If the departments are the same, then we need to compare the employee names
+                    int nameCompareValue = this.emplist[j].getName().compareTo(this.emplist[j + 1].getName());
+                    if (nameCompareValue > 0) {
                         // swap
                         Employee temp = this.emplist[j];
                         this.emplist[j] = this.emplist[j + 1];
                         this.emplist[j + 1] = temp;
-                    } else if (dateCompareValue == 0) {
-                        // If the departments are the same, then we need to compare the employee names
-                        if (this.emplist[j].getName().compareTo(this.emplist[j + 1].getName()) > 0) {
+                    } else if (nameCompareValue == 0) {
+                        // If the names are the same, then we need to compare the date hired
+                        if (this.emplist[j].getDateHired().compareTo(this.emplist[j + 1].getDateHired()) < 0) {
                             // swap
                             Employee temp = this.emplist[j];
                             this.emplist[j] = this.emplist[j + 1];
@@ -191,11 +197,11 @@ public class Company {
                     }
                 }
             }
+        }
 
-            // Now that employees are sorted by departments, print them out
-            for (int i = 0; i < this.numEmployee; i++) {
-                System.out.println(this.emplist[i]);
-            }
+        // Now that employees are sorted by departments, print them out
+        for (int i = 0; i < this.numEmployee; i++) {
+            System.out.println(this.emplist[i]);
         }
     }
 
@@ -203,39 +209,36 @@ public class Company {
      * Print each employee's earning statement by date hired.
      */
     public void printByDate() {
-        // Check if bookshelf is empty
-        if (this.numEmployee == 0) {
-            System.out.println("list is empty!");
-        } else {
-            // Sort employees by date hired
-            // We will be using bubble sort
-            for (int i = 0; i < this.numEmployee - 1; i++) {
-                // the last i elements are already in place
-                for (int j = 0; j < this.numEmployee - i - 1; j++) {
-                    // Compare dates hired
-                    int dateCompareValue = this.emplist[j].getDateHired().compareTo(this.emplist[j + 1].getDateHired());
-                    if (dateCompareValue > 0) {
+
+        // Sort employees by date hired
+        // We will be using bubble sort
+        for (int i = 0; i < this.numEmployee - 1; i++) {
+            // the last i elements are already in place
+            for (int j = 0; j < this.numEmployee - i - 1; j++) {
+                // Compare dates hired
+                int dateCompareValue = this.emplist[j].getDateHired().compareTo(this.emplist[j + 1].getDateHired());
+                if (dateCompareValue > 0) {
+                    // swap
+                    Employee temp = this.emplist[j];
+                    this.emplist[j] = this.emplist[j + 1];
+                    this.emplist[j + 1] = temp;
+                } else if (dateCompareValue == 0) {
+                    // If the dates are the same, then we need to compare the employee names
+                    if (this.emplist[j].getName().compareTo(this.emplist[j + 1].getName()) > 0) {
                         // swap
                         Employee temp = this.emplist[j];
                         this.emplist[j] = this.emplist[j + 1];
                         this.emplist[j + 1] = temp;
-                    } else if (dateCompareValue == 0) {
-                        // If the dates are the same, then we need to compare the employee names
-                        if (this.emplist[j].getName().compareTo(this.emplist[j + 1].getName()) > 0) {
-                            // swap
-                            Employee temp = this.emplist[j];
-                            this.emplist[j] = this.emplist[j + 1];
-                            this.emplist[j + 1] = temp;
-                        }
                     }
                 }
             }
-
-            // Now that employees are sorted by dates hired, print them out
-            for (int i = 0; i < this.numEmployee; i++) {
-                System.out.println(this.emplist[i]);
-            }
         }
+
+        // Now that employees are sorted by dates hired, print them out
+        for (int i = 0; i < this.numEmployee; i++) {
+            System.out.println(this.emplist[i]);
+        }
+
     }
 
     /**
