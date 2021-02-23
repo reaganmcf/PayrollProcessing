@@ -2,7 +2,7 @@
  * Global constants to be used across the entire project, including enum
  * definitions
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Constants {
     public static final String CURRENCY_FORMAT_STRING = "$%,.2f";
@@ -17,10 +17,25 @@ public class Constants {
     public static String COMPENSATION_STR = " Compensation ";
     public static String FULLTIME_STR = "FULL TIME";
     public static String PARTTIME_STR = "PART TIME";
-    public static int NUMBER_OF_DEPARTMENTS = 3;
-    public static int CS_DEPARTMENT_INDEX = 0;
-    public static int ECE_DEPARTMENT_INDEX = 0;
-    public static int IT_DEPARTMENT_INDEX = 0;
+
+    // predefined constants for JUnit testing
+    public static final Profile TEST_VARS_PROFILE1 = new Profile("Doe,Jane", "CS", new Date());
+    public static final Profile TEST_VARS_PROFILE2 = new Profile("John,Wick", "IT", new Date("1/1/2020"));
+    public static final Profile TEST_VARS_PROFILE3 = new Profile("Matt,Jones", "ECE", new Date("3/27/2014"));
+    public static final Profile TEST_VARS_PROFILE4 = new Profile("Lily,Chang", "CS", new Date());
+    public static final Parttime TEST_VARS_PARTTIME = new Parttime(TEST_VARS_PROFILE1, 21.3);
+    public static final Fulltime TEST_VARS_FULLTIME = new Fulltime(TEST_VARS_PROFILE3, 10000);
+    public static final Management TEST_VARS_MANAGEMENT = new Management(TEST_VARS_PROFILE2, 1000,
+            Constants.MANAGEMENT_ROLES.MANAGER);
+    public static final Management TEST_VARS_MANAGEMENT_MANAGER = new Management(TEST_VARS_PROFILE1, 100000,
+            MANAGEMENT_ROLES.MANAGER);
+    public static final Management TEST_VARS_MANAGEMENT_DEPARTMENT_HEAD = new Management(TEST_VARS_PROFILE1, 100000,
+            MANAGEMENT_ROLES.DEPARTMENT_HEAD);
+    public static final Management TEST_VARS_MANAGEMENT_DIRECTOR = new Management(TEST_VARS_PROFILE1, 100000,
+            MANAGEMENT_ROLES.DIRECTOR);
+    public static final double TEST_VARS_EXPECTED_MANAGER_PAYMENT = 4038.46;
+    public static final double TEST_VARS_EXPECTED_DEPARTMENT_HEAD_PAYMENT = 4211.54;
+    public static final double TEST_VARS_EXPECTED_DIRECTOR_PAYMENT = 4307.69;
 
     private static String MANAGER_STR = "Manager";
     private static String DEPARTMENT_HEAD_STR = "DepartmentHead";
@@ -129,12 +144,6 @@ public class Constants {
                     throw new IllegalArgumentException(NO_MATCHING_MANAGER_ROLE_MSG);
             }
         }
-
-        /**
-         * Given
-         * 
-         * @return
-         */
 
         /**
          * Calculate the additional compensation a given manager recieves which varies

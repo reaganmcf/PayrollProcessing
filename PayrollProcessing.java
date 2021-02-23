@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
  * commands with their repsective parameters to the correct Company function
  * call
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class PayrollProcessing {
     // Command Identifiers

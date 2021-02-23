@@ -3,7 +3,7 @@
  * Extends the Employee class and overrides specific methods that have specific
  * implementations for Parttime Employees
  * 
- * @author Reagan McFarland
+ * @author Vatche Kafafian
  */
 public class Parttime extends Employee {
 
