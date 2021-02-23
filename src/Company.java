@@ -3,7 +3,7 @@
  * Company size is by default set to 4 via the INITIAL_EMPLOYEE_SIZE constant
  * variable.
  * 
- * @author Vatche Kafafian
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Company {
     private Employee[] emplist;

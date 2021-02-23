@@ -4,7 +4,7 @@ import org.junit.*;
  * Test Suite for Company.java - Contains tests for Company.add(),
  * Company.remove(), and Company.setHours()
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class CompanyTest {
   Company c;

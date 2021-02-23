@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
  * the Comparable interface in order for easy comparison against dates to
  * determine which date is before
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Date implements Comparable<Date> {
 

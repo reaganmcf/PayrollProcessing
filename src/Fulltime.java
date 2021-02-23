@@ -3,7 +3,7 @@
  * Extends the Employee class and overrides specific methods that have specific
  * implementations for Fulltime Employees
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Fulltime extends Employee {
 

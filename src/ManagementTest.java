@@ -4,7 +4,7 @@ import org.junit.*;
  * Test Suite for Management.java - Contains tests for
  * Management.calculatePayment()
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland Vatche Kafafian
  */
 public class ManagementTest {
 

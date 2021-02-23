@@ -1,7 +1,7 @@
 /**
  * Employee Superclass used by Fulltime, Parttime, and Management Employees
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Employee {
 

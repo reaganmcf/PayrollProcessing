@@ -4,7 +4,7 @@
  * class(and hence, also the Employee class) and overrides specific methods that
  * have specific implementations for Management Employees
  * 
- * @author Reagan McFarland
+ * @author Reagan McFarland, Vatche Kafafian
  */
 public class Management extends Fulltime {
 
