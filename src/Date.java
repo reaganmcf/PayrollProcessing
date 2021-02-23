@@ -2,7 +2,7 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 
 /**
- * Custum Date implemention supporting day, month, and year. It does not support
+ * Custom Date implemention supporting day, month, and year. It does not support
  * any smaller units of time such as seconds, minutes, hours, etc. Implements
  * the Comparable interface in order for easy comparison against dates to
  * determine which date is before
