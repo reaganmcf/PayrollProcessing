@@ -95,7 +95,7 @@ public class Company {
         // has to call .find()
         // Call the find method to check if the employee is in emplist
         int empListIndex = find(employee);
-        if (empListIndex == -1) {
+        if (empListIndex == NOT_FOUND) {
             return false;
         }
         // Traverse emplist from the index to be removed and shift each employee to the
@@ -134,6 +134,14 @@ public class Company {
         Parttime emp = (Parttime) this.emplist[idx];
         // cast employee passed into setHours as type Parttime
         Parttime temp = (Parttime) employee;
+
+        // hours cannot be over the max limit
+        if (temp.getWorkingHours() > Constants.MAX_HOURS_IN_PAY_PERIOD)
+            return false;
+
+        // hours cannot be negative
+        if (temp.getWorkingHours() < 0)
+            return false;
 
         // set the working hours of the employee found in the list
         emp.setWorkingHours(temp.getWorkingHours());

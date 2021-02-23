@@ -81,7 +81,7 @@ public class Employee {
     };
 
     /**
-     * equals @Override method for Employee
+     * equals @Override method for checking if 2 Employees have the same profile
      * 
      * @param e Object to compare against
      * @return boolean whether or not the employees are equal

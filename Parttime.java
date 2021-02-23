@@ -86,7 +86,10 @@ public class Parttime extends Employee {
     }
 
     /**
-     * TODO
+     * equals @Override method for checking if 2 Employees have the same profile
+     * 
+     * @param e Object to compare against
+     * @return boolean whether or not the employees are equal
      */
     @Override
     public boolean equals(Object e) {
